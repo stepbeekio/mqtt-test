@@ -1,0 +1,6 @@
+hivemq:
+  host: ${HIVEMQ_HOST}
+  username: ${HIVEMQ_USERNAME}
+  password: ${HIVEMQ_PASSWORD}
+  port: ${HIVEMQ_PORT:8883}
+
