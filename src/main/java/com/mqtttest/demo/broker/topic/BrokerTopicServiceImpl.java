@@ -28,12 +28,18 @@ public class BrokerTopicServiceImpl implements BrokerTopicService {
 
     private final ObjectMapper objectMapper;
 
-    private final ExecutorService executorService = Executors.newWorkStealingPool();
+    private final ExecutorService executorService;
+
 
     public BrokerTopicServiceImpl(BrokerRepository brokerRepository, HiveMqConnectionPool connectionPool, ObjectMapper objectMapper) {
         this.brokerRepository = brokerRepository;
         this.connectionPool = connectionPool;
         this.objectMapper = objectMapper;
+//        this.executorService = Executors.newVirtualThreadPerTaskExecutor();
+//        logger.info("Starting with virtual threads");
+
+        logger.info("Could not start with virtual threads, falling back to work stealing pool");
+        this.executorService = Executors.newWorkStealingPool();
     }
 
     @Override

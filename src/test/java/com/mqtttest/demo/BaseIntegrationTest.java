@@ -14,7 +14,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
-@SpringBootTest(classes = {DemoApplication.class})
+@SpringBootTest(classes = {App.class})
 @Testcontainers
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
