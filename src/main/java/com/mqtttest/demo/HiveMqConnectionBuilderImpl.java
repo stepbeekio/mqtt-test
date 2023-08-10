@@ -16,13 +16,15 @@ public class HiveMqConnectionBuilderImpl implements HiveMqConnectionBuilder {
 
     @Override
     public Mqtt5BlockingClient buildAndConnect(Broker broker) {
-        Mqtt5BlockingClient client = MqttClient.builder()
-                .useMqttVersion5()
-                .serverHost(broker.getHost())
-                .serverPort(broker.getPort())
-                .buildBlocking();
+        Mqtt5BlockingClient client;
 
         if (broker.requiresAuthentication()) {
+            client = MqttClient.builder()
+                    .useMqttVersion5()
+                    .serverHost(broker.getHost())
+                    .serverPort(broker.getPort())
+                    .sslWithDefaultConfig()
+                    .buildBlocking();
             client.connectWith()
                     .simpleAuth()
                     .username(broker.getUsername())
@@ -30,8 +32,14 @@ public class HiveMqConnectionBuilderImpl implements HiveMqConnectionBuilder {
                     .applySimpleAuth()
                     .send();
 
-        } else {
             logger.info("Connected to HiveMQ with TLS and username/pw");
+
+        } else {
+            client = MqttClient.builder()
+                    .useMqttVersion5()
+                    .serverHost(broker.getHost())
+                    .serverPort(broker.getPort())
+                    .buildBlocking();
             client.connect();
             logger.info("Connected to HiveMQ without username/pw");
         }
