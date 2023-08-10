@@ -1,6 +1,6 @@
-hivemq:
-  host: ${HIVEMQ_HOST}
-  username: ${HIVEMQ_USERNAME}
-  password: ${HIVEMQ_PASSWORD}
-  port: ${HIVEMQ_PORT:8883}
-
+spring:
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
