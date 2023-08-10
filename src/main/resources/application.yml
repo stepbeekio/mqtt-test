@@ -1,6 +1,5 @@
 spring:
   datasource:
-    url: ${DATABASE_URL}
-    username: ${DATABASE_USER}
-    password: ${DATABASE_PASSWORD}
-    driver-class-name: org.postgresql.Driver
+    driverClassName: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 5
