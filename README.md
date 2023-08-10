@@ -8,7 +8,29 @@ Tests rely on testcontainers so you should be able to run easily on Java 20 on a
 gradle build
 ```
 
-## Running the application
+
+## Heroku Deployment
+An instance of the app has been deployed to Heroku: https://mqtt-demo-12d0ff42275a.herokuapp.com/ with an existing broker named `test-broker`.
+
+You can subscribe to messages on the broker with:
+
+```bash
+curl https://mqtt-demo-12d0ff42275a.herokuapp.com/mqtt/test-broker/receive/test-topic
+```
+
+And then in another tab send messages with:
+
+```bash
+curl -X POST https://mqtt-demo-12d0ff42275a.herokuapp.com/mqtt/test-broker/send/test-topic -H 'Content-Type: application/json' -d '{"message": "Hello World"}'
+```
+
+Alternatively, you can send a number of messages by running:
+
+```bash
+cat vegeta_heroku_example.txt | vegeta attack -rate=10 -duration=30s | tee results.bin | vegeta report 
+```
+
+## Running the application locally
 
 The application starts a postgresql database and a HiveMQ test container on each run. You can start in development mode
 by running the DevApplication class in test sources.

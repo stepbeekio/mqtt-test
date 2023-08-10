@@ -1,0 +1,3 @@
+POST https://mqtt-demo-12d0ff42275a.herokuapp.com/mqtt/test-broker/send/test-topic
+Content-Type: application/json
+@./vegeta.json
